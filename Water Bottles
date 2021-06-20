@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int numWaterBottles(int numBottles, int exc) 
+    {
+        int curr=numBottles;
+        int n1=1;
+        int remm=0;
+        int res=curr;
+        while(n1)
+        {
+            n1=curr/exc;
+            remm=curr-(exc*n1);
+            curr=n1+remm;
+            res+=n1;
+        }
+        
+        return res;
+    }
+};
