@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maximumUnits(vector<vector<int>>& box, int trucksize) 
+    {
+        sort(box.begin(),box.end(),[&](auto &a,auto &b)
+        {
+            return a[1]>b[1] || (a[1]==b[1] && a[0]>b[0]);
+        });
+        int sum=0;
+        for(int i=0;i<box.size();i++)
+        {
+            int x=min(box[i][0],trucksize);
+            sum+= x*box[i][1];
+            trucksize-=x;
+            if(trucksize<=0)break;
+        }
+        return sum;
+    }
+};
