@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int totalMoney(int n) 
+    {
+        int days=0;
+        int mon=1;
+        int sum=0;
+        int ans=0;
+        int i=0;
+        while(i<n)
+        {
+            sum+=1;
+            ans+=sum;
+            days++;
+            if(days==7)
+            {
+                days=0;
+                sum=mon;
+                mon++;
+            }
+            i++;
+        }
+        return ans;
+    }
+};
