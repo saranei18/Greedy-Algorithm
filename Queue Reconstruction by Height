@@ -1,0 +1,21 @@
+class Solution {
+public:
+    static bool comp(vector<int>& a, vector<int>& b)
+    {
+        if(a[0]==b[0]) return a[1]<b[1];
+        return a[0]>b[0];
+    }
+    vector<vector<int>> reconstructQueue(vector<vector<int>>& a) 
+    {
+        int n=a.size();
+        sort(a.begin(),a.end(),comp);
+        vector<vector<int>>ans;
+        ans.push_back(a[0]);
+        for(int i=1;i<n;i++)
+        {
+            int index=a[i][1];
+            ans.insert(ans.begin()+index,a[i]);
+        }
+        return ans;
+    }
+};
