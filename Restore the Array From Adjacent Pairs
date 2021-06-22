@@ -1,0 +1,41 @@
+class Solution {
+public:
+    vector<int> restoreArray(vector<vector<int>>& ad) 
+    {
+        unordered_map<int,vector<int>>mp;
+        for(int i=0;i<ad.size();i++)
+        {
+            mp[ad[i][0]].push_back(ad[i][1]);
+            mp[ad[i][1]].push_back(ad[i][0]);
+        }
+        vector<int>ans;
+        int next;
+        for(auto&x:mp)
+        {
+            if(x.second.size()==1)
+            {
+                ans.push_back(x.first);
+                next=x.second[0];
+                mp.erase(x.first);
+                break;
+            }
+        }
+        
+        while(mp.size()>0)
+        {
+            int prev=ans.back();
+            int curr=next;
+            
+            ans.push_back(curr);
+            
+            if(mp[curr][0]!=prev && mp.find(mp[curr][0])!=mp.end())
+                next=mp[curr][0];
+            else if(mp[curr].size()>1 && mp.find(mp[curr][1])!=mp.end())
+                next=mp[curr][1];
+            
+            mp.erase(curr);
+        }
+        
+        return ans;
+    }
+};
