@@ -1,0 +1,48 @@
+class Solution {
+public:
+    void fliprow(int row,vector<vector<int>>&g)
+    {
+        int n=g[0].size();
+        for(int i=0;i<n;i++)
+        {
+            g[row][i]=(g[row][i]==0)?1:0;
+        }
+    }
+    void flipcol(int col,vector<vector<int>>&g)
+    {
+        int n=g.size();
+        for(int i=0;i<n;i++)
+        {
+            g[i][col]=(g[i][col]==0)?1:0;
+        }
+    }
+    int matrixScore(vector<vector<int>>& grid) 
+    {
+        int m=grid.size();
+        int n=grid[0].size();
+        
+        for(int i=0;i<m;i++)
+        {
+            if(grid[i][0]==0)fliprow(i,grid);    
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+           int count=0;
+            for(int j=0;j<m;j++)
+            {
+                if(grid[j][i]==0)count++;
+            }
+            if(count>m/2)flipcol(i,grid);
+        }
+        int sum=0;
+        for(int i=0;i<m;i++)
+        {
+            for(int j=n-1;j>=0;j--)
+            {
+                sum+=grid[i][j]*pow(2,(n-1)-j);
+            }
+        }
+        return sum;
+    }
+};
