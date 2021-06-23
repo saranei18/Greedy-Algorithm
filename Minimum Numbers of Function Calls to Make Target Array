@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int minOperations(vector<int>& nums) 
+    {
+        int incops=0;
+        int multiops=0;
+        int ans=0;
+        for(int i=0;i<nums.size();i++)
+        {
+            multiops=0;
+            int x=nums[i];
+            while(x)
+            {
+                if(x%2)
+                {
+                    incops++;
+                    x--;
+                }
+                else
+                {
+                    multiops++;
+                    x/=2;
+                }
+            }
+            ans=max(ans,multiops);
+        }
+        return incops+ans;
+    }
+};
