@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int minDifference(vector<int>& nums) 
+    {
+        if(nums.size()<=4)return 0;
+        sort(nums.begin(),nums.end());
+        int n=nums.size();
+        int first=nums[n-1]-nums[3];
+        int second=min(first,nums[n-2]-nums[2]);
+        int third=min(second,nums[n-3]-nums[1]);
+        return min(third,nums[n-4]-nums[0]);
+    }
+};
