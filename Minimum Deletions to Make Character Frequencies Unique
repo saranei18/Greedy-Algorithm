@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int minDeletions(string s) 
+    {
+        int hash[26]={0};
+        unordered_map<int,int>mp;
+        int ans=0;
+        for(int i=0;i<s.length();i++)
+            hash[s[i]-'a']++;
+        
+        for(int i=0;i<26;i++)
+        {
+            int val=hash[i];
+            
+            while(mp[val]>0 && val!=0)
+            {
+                val--;
+            }
+            mp[val]++;
+            ans+=abs(hash[i]-val);
+        }
+        return ans;
+    }
+};
