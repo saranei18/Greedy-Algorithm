@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string smallestSubsequence(string s) 
+    {
+        int visit[26]={0};
+        int freq[26]={0};
+        stack<int>s1;
+        for(int i=0;i<s.length();i++)
+            freq[s[i]-'a']++;
+        for(int i=0;i<s.length();i++)
+        {
+            freq[s[i]-'a']--;
+            if(visit[s[i]-'a'])
+                continue;
+            
+            while(!s1.empty() && s[i]<s1.top() && freq[s1.top()-'a']>0)
+            {
+                visit[s1.top()-'a']=0;
+                s1.pop();
+            }
+            s1.push(s[i]);
+            visit[s[i]-'a']=1;
+        }
+        string res="";
+        while(!s1.empty())
+        {
+            res.push_back(s1.top());
+            s1.pop();
+        }
+        reverse(res.begin(),res.end());
+        return res;
+    }
+};
