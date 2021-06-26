@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int helper(vector<int> &group,vector<int> &nums,int i)
+    {
+        int gs=group.size();
+        int ns=nums.size();
+        while(i+gs<=ns)
+        {
+            int j;
+            for(j=i;j<i+gs;j++)
+            {
+                if(group[j-i]!=nums[j])
+                    break;
+            }
+            if(j==i+gs)
+                return i+gs;
+            i++;
+        }
+        return -1;
+    }
+    bool canChoose(vector<vector<int>>& groups, vector<int>& nums) 
+    {
+        int st=0;
+        for(auto group:groups)
+        {
+            st=helper(group,nums,st);
+            if(st==-1)return false;
+        }
+        return true;
+    }
+};
