@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int minOperations(vector<int>& nums1, vector<int>& nums2) 
+    {
+        int m=nums1.size();
+        int n=nums2.size();
+        if(m>n && m>n*6)return -1;
+        if(n>m && n>m*6)return -1;
+        int sum_1=accumulate(nums1.begin(),nums1.end(),0);
+        int sum_2=accumulate(nums2.begin(),nums2.end(),0);
+        if(sum_1==sum_2)return 0;
+        if(sum_1>sum_2)
+            return minOperations(nums2,nums1);
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.rbegin(),nums2.rend());
+        int count=0;
+        for(int i=0,j=0;sum_1<sum_2;)
+        {
+            int d1=i==m?0:6-nums1[i];
+            int d2=j==n?0:nums2[j]-1;
+            
+            if(d1>d2)
+            {
+                sum_1+=d1;
+                count++;
+                i++;
+            }
+            else
+            {
+                sum_2-=d2;
+                count++;
+                j++;
+            }
+        }
+        
+        return count;
+    }
+};
