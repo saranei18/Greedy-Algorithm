@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int getMaximumConsecutive(vector<int>& coins) 
+    {
+        map<int,int>mp;
+        for(auto x:coins)
+            mp[x]++;
+        int ans=0;
+        for(auto m:mp)
+        {
+            int x=m.first*m.second;
+          if(ans+1>=m.first)
+              ans+=x;
+            else
+                break;
+        }
+        return ans+1;
+    }
+};
