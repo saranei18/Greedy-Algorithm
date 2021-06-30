@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int movesToMakeZigzag(vector<int>& nums) 
+    {
+        int even=0;
+        int odd=0;
+        nums.push_back(1001);
+        nums.insert(nums.begin(),1001);
+        for(int i=1;i<nums.size()-1;i=i+2)
+            even+=max(nums[i]-min(nums[i+1],nums[i-1])+1,0);
+        for(int i=2;i<nums.size()-1;i=i+2)
+            odd+=max(nums[i]-min(nums[i+1],nums[i-1])+1,0);
+        return min(even,odd);
+    }
+};
