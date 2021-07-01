@@ -1,0 +1,25 @@
+class Solution {
+public:
+    static bool comp(vector<int> a, vector<int> b){
+        if(a[1] == b[1]){
+            return a[0]<b[0];
+        }
+        if(a[1] < b[1])
+            return true;
+        return false;
+    }
+    int eraseOverlapIntervals(vector<vector<int>>& nums) 
+    {
+        sort(nums.begin(),nums.end(),comp);
+        int b=INT_MIN;
+        int count=0;
+        for(auto x:nums)
+        {
+            if(x[0]>=b)
+                b=x[1];
+            else
+                count++;
+        }
+        return count;
+    }
+};
