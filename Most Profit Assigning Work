@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int maxProfitAssignment(vector<int>& diff, vector<int>& profit, vector<int>& worker) 
+    {
+        map<int,int>mp;
+        
+        for(int i=0;i<diff.size();i++)
+        {
+            mp[diff[i]]=max(profit[i],mp[diff[i]]);
+        }
+        vector<int>v(100001,0);
+        
+        int max1=0;
+        for(auto x:mp)
+        {
+            max1=max(max1,x.second);
+            v[x.first]=max1;
+        }
+        int prev=0;
+        for(int i=0;i<v.size();i++)
+        {
+            if(v[i]==0)
+            {
+                v[i]=prev;
+            }
+            else{
+                prev=v[i];
+            }
+        }
+        int ans=0;
+        for(int i=0;i<worker.size();i++)
+        {
+            ans+=v[worker[i]];
+        }
+        return ans;
+    }
+    };
