@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int remove(string &s,char a,char b,int score){
+        int ans=0;
+        string temp;
+        
+        for(auto x:s)
+        {
+            if(!temp.size()||x!=b)
+            {
+                temp.push_back(x);
+                continue;
+            }
+            if(temp.back()==a)
+            {
+                temp.pop_back();
+                ans+=score;
+            }
+            else
+                temp+=x;
+        }
+        s=temp;
+        return ans;
+    }
+    int maximumGain(string s, int x, int y) 
+    {
+        if(x>=y)
+        {
+            return remove(s,'a','b',x)+remove(s,'b','a',y);
+        }
+        else
+            return remove(s,'b','a',y)+remove(s,'a','b',x);
+    }
+};
