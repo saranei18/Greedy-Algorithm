@@ -16,16 +16,18 @@ public:
                 mp[rs[i][0]][rs[i][1]]=0;
         }
         
-        int count=2*n;
+        int count=(n-mp.size())*2;
         for(auto x:mp)
         {
             vector<int>vc=x.second;
             
-            if(vc[2]==1&&vc[3]==1&&vc[4]==1&&vc[5]==1&&vc[6]==1&&vc[7]==1&&vc[8]==1&&vc[9]==1)continue;
+            if(vc[2]==1&&vc[3]==1&&vc[4]==1&&vc[5]==1&&vc[6]==1&&vc[7]==1&&vc[8]==1&&vc[9]==1)
+            {
+                count+=2;
+                continue;
+            }
             
-                           if(vc[4]==1&&vc[5]==1&&vc[6]==1&&vc[7]==1||vc[2]==1&&vc[3]==1&&vc[4]==1&&vc[5]==1||vc[6]==1&&vc[7]==1&&vc[8]==1&&vc[9]==1)count--;
-         else
-             count-=2;
+            if(vc[4]==1&&vc[5]==1&&vc[6]==1&&vc[7]==1||vc[2]==1&&vc[3]==1&&vc[4]==1&&vc[5]==1||vc[6]==1&&vc[7]==1&&vc[8]==1&&vc[9]==1)count++;
         }
         return count;
     }
