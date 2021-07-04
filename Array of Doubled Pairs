@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool static comp(int p,int q)
+    {
+        return abs(p)<abs(q);
+    }
+    bool canReorderDoubled(vector<int>& arr) 
+    {
+        unordered_map<int,int>mp;
+        for(auto x:arr)
+            mp[x]++;
+        sort(arr.begin(),arr.end(),comp);
+        
+        for(auto x:arr)
+        {
+            if(mp[x]==0)continue;
+            
+            if(mp[2*x]<1)return false;
+            mp[x]--;
+            mp[2*x]--;
+        }
+        return true;
+    }
+};
