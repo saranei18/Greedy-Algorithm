@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int minDeletionSize(vector<string>& strs) 
+    {
+        int n=strs[0].length();
+        int m=strs.size();
+        int res=0;
+        int i=1;
+        while(i<m)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(strs[0][j]=='@'|| strs[i][j]==strs[i-1][j])continue;
+                
+                if(strs[i][j]>strs[i-1][j])break;
+                else
+                {
+                    res++;
+                    strs[0][j]='@';
+                    i=0;
+                    break;
+                }
+            }
+            i++;
+        }
+        return res;
+    }
+};
