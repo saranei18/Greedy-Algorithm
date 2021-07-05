@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool comp(int a,int b,bool isneg)
+    {
+        if(isneg)return a<=b;
+        return a>=b;
+    }
+    string maxValue(string n, int x) 
+    {
+        bool isneg=(n[0]=='-');
+        string add="";
+        add+=char('0'+x);
+        int i=isneg;
+        
+        while(i<n.size() && comp(n[i]-'0',x,isneg))i++;
+        n=n.substr(0,i)+add+n.substr(i);
+        return n;
+    }
+};
