@@ -1,0 +1,67 @@
+class Solution {
+public:
+    bool checkValidString(string s) 
+    {
+        int balance=0;
+        
+        for(int i=0;i<s.length();i++)
+        {
+            if(s[i]=='(' || s[i]=='*')balance++;
+            else
+            {
+                if(balance==0)return false;
+                balance--;
+            }
+        }
+        balance=0;
+        for(int i=s.length()-1;i>=0;i--)
+        {
+            if(s[i]==')' || s[i]=='*')balance++;
+            else
+            {
+                if(balance==0)return false;
+                balance--;
+            }
+        }
+        
+        return true;
+    }
+};
+
+
+
+DP SOLN
+----------------
+
+class Solution {
+public:
+    int helper(string s,int i,int count,int dp[][101])
+    {
+        if(i>=s.length())
+        {
+            if(count==0)return true;
+            return false;
+        }
+        if(count<0)return false;
+        if(dp[i][count]!=-1)return dp[i][count];
+        bool res=false;
+        if(s[i]=='(')
+            return dp[i][count]=helper(s,i+1,count+1,dp);
+        else if(s[i]==')')
+            return dp[i][count]=helper(s,i+1,count-1,dp);
+        else
+        {
+            bool opt1=helper(s,i+1,count+1,dp);
+            bool opt2=helper(s,i+1,count,dp);
+            bool opt3=helper(s,i+1,count-1,dp);
+            res=(opt1||opt2||opt3);
+        }
+        return dp[i][count]=res;
+    }
+    bool checkValidString(string s) 
+    {
+        int dp[101][101];
+        memset(dp,-1,sizeof dp);
+        return helper(s,0,0,dp);
+    }
+};
