@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int>dp;
+    
+    int helper(vector<int>&nums,int i)
+    {
+        if(i>=nums.size())return INT_MAX;
+        if(i==nums.size()-1)return 0;
+        if(dp[i]!=-1)return dp[i];
+        int ans=1000000;
+        for(int k=1;k<=nums[i]&&k+i<nums.size();k++)
+        {
+            ans=min(ans,helper(nums,k+i)+(1));
+        }
+        return dp[i]=ans;
+    }
+    int jump(vector<int>& nums) 
+    {   
+        dp.resize(20001,-1);
+        return helper(nums,0);
+    }
+};
