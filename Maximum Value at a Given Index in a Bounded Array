@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int maxValue(int n, int index, int maxsum) 
+    {
+        int sum=n;
+        int res=1;
+        
+        int l=index,r=index;
+        
+        while(sum+(r-l+1)<=maxsum)
+        {
+            sum+=(r-l)+1;            
+            l=l==0?0:l-1;
+            r=r==n-1?r:r+1;
+            res++;            
+            if(l==0 && r==n-1)
+            {
+                int steps=0;
+                steps+=(maxsum-sum)/n;
+                sum+=(steps*n);
+                res+=steps;
+            }
+        }
+        return res;
+    }
+};
