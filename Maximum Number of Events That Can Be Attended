@@ -1,0 +1,29 @@
+class Solution {
+public:
+    static bool comp(vector<int>&a,vector<int>&b)
+    {
+    if(a[1]<b[1])return true;
+    else if(a[1]==b[1])return a[0]<b[0];
+    return false;
+    }
+    int maxEvents(vector<vector<int>>& events) 
+    {
+        int count=0;
+        set<int>days;
+        sort(events.begin(),events.end(),comp);
+        for(int i=1;i<=100000;i++)days.insert(i);
+        for(auto &event:events)
+        {
+            int s=event[0];
+            int e=event[1];
+            
+            auto it=days.lower_bound(s);
+            if(it==days.end() || *it>e)continue;
+            else{
+                count++;
+                days.erase(it);
+            }
+        }
+        return count;
+    }
+};
