@@ -1,0 +1,35 @@
+class Solution {
+public:
+    
+    int search(vector<int>&nums,int target,int l,int r)
+    {
+        if(l>=r)return nums[l];
+        int mid=l+(r-l)/2;
+        
+        if(nums[mid]==target)return target;
+        
+        int val=nums[mid]<target?search(nums,target,mid+1,r):search(nums,target,l,mid-1);
+        
+        return abs(nums[mid]-target)<abs(val-target)?nums[mid]:val;
+        
+    }
+    int minAbsoluteSumDiff(vector<int>& nums1, vector<int>& nums2) 
+    {
+        long long res=LONG_LONG_MAX,size=nums1.size(),diff=0;
+        vector<int>snum=nums1;
+        sort(snum.begin(),snum.end());
+        for(int i=0;i<size;i++)
+        {
+            diff+=abs(nums1[i]-nums2[i]);
+        }
+        if(diff==0)return 0;
+        
+        for(int i=0;i<size;i++)
+        {
+            int closest=search(snum,nums2[i],0,size-1);
+            res=min(res,diff-abs(nums1[i]-nums2[i])+abs(closest-nums2[i]));
+        }
+        
+        return res%1000000007;
+    }
+};
