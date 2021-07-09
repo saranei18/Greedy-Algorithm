@@ -1,0 +1,52 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string>
+#include<utility>
+using namespace std;
+int m=5;
+int n=6;
+
+int greedy(int arr[][3])
+{
+    vector<pair<int,int>>vect[n+1];
+
+    for(int i=0;i<m;i++)
+    {
+        vect[arr[i][2]].push_back(make_pair(arr[i][1],arr[i][0]));
+    }
+
+    for(int i=0;i<=n;i++)
+    {
+        sort(vect[i].begin(),vect[i].end());
+    }
+
+    int counts=0;
+
+    for(int i=0;i<=n;i++)
+    {
+        int x=0;
+        if(vect[i].size()==0)continue;
+        counts++;
+        for(int j=1;j<vect[i].size();j++)
+        {
+            if(vect[i][j].second>=vect[i][x].first)
+            {
+                counts++;
+                x=j;
+            }
+        }
+    }
+    return counts;
+}
+int main()
+{
+    int arr[m][3] = { {1000, 1030, 1},
+                      {1010, 1020, 1},
+                      {1025, 1040, 1},
+                      {1130, 1145, 2},
+                      {1130, 1140, 2 }};
+
+
+    cout<<greedy(arr);
+}
