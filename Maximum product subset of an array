@@ -1,0 +1,29 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+int main()
+{
+    vector<int>nums{-1,-1,3,4,-2};
+    int zo=0;
+    int nc=0;
+    int prod=1;
+    int maxe=INT_MIN;
+    for(int i=0;i<nums.size();i++)
+    {
+        if(nums[i]==0)continue;
+        if(nums[i]<0)
+        {
+            maxe=max(maxe,nums[i]);
+            nc++;
+        }
+        prod*=nums[i];
+    }
+    if(nc & 1)
+    {
+        prod=prod/maxe;
+    }
+    cout<<prod;
+    return 0;
+}
